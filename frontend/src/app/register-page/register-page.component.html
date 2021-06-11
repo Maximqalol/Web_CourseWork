@@ -1,31 +1,59 @@
 <div class="card">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
   <div class="card-content">
     <span class="card-title">Регистрация аккаунта</span>
     <div class="input-field">
-      <input id="last_name" type="text" class="validate">
+      <input
+        formControlName="last_name"
+        id="last_name" type="text" class="validate">
       <label for="last_name">Фамилия:</label>
+      <span class="helper-text red-text"
+            *ngIf="form.get('last_name')?.touched && form.get('last_name')?.invalid">Введите фамилию!
+      </span>
     </div>
     <div class="input-field">
-      <input id="first_name" type="text" class="validate">
+      <input
+        formControlName="first_name"
+        id="first_name" type="text" class="validate">
       <label for="first_name">Имя:</label>
+      <span class="helper-text red-text"
+            *ngIf="form.get('first_name')?.touched && form.get('first_name')?.invalid">Введите имя!
+      </span>
     </div>
     <div class="input-field">
-      <input id="middle_name" type="text" class="validate">
+      <input
+        formControlName="middle_name"
+        id="middle_name" type="text" class="validate">
       <label for="middle_name">Отчество:</label>
+      <span class="helper-text red-text"
+            *ngIf="form.get('middle_name')?.touched && form.get('middle_name')?.invalid">Введите отчество!
+      </span>
     </div>
     <div class="input-field">
-      <input id="username" type="text" class="validate">
+      <input
+        formControlName="username"
+        id="username" type="text" class="validate">
       <label for="username">Имя пользователя:</label>
+      <span class="helper-text red-text"
+            *ngIf="form.get('username')?.invalid && form.get('username')?.touched"
+            >Имя пользователя должно содержать хотя бы 5 символов!
+      </span>
     </div>
     <div class="input-field">
-      <input id="password" type="password" required>
+      <input
+        formControlName="password"
+        id="password" type="password">
       <label for="password">Пароль:</label>
+      <span class="helper-text red-text"
+            *ngIf="form.get('password')?.invalid && form.get('password')?.touched"
+            >Пароль должен содержать хотя бы 6 символов!
+      </span>
     </div>
     <label>Фотография пользователя:</label>
     <div class="file-field input-field">
       <div class="btn">
         <span>Выбрать</span>
-        <input type="file">
+        <input id="file" type="file" required>
       </div>
       <div class="file-path-wrapper">
         <input class="file-path validate" type="text">
@@ -33,6 +61,10 @@
     </div>
   </div>
   <div class="card-action">
-    <button class="modal-action btn waves-effect">Зарегистрироваться</button>
+    <button
+      [disabled]="form.invalid"
+      class="modal-action btn waves-effect"
+    >Зарегистрироваться</button>
   </div>
+  </form>
 </div>

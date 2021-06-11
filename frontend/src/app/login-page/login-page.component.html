@@ -8,21 +8,26 @@
         id="username"
         type="text" class="validate">
       <label for="username">Имя пользователя:</label>
-      <span
-        class="helper-text red-text"
-        *ngIf="form.get('username').invalid && form.get('username').touched"
-      >
-        Неверное имя пользователя!
+      <span class="helper-text red-text"
+        *ngIf="form.get('username')?.invalid && form.get('username')?.touched">Введите имя пользователя!
       </span>
     </div>
     <div class="input-field">
       <input
-        [type]="hidePassword ? 'password' : 'text'"
         formControlName="password"
         id="password"
         type="password">
       <label for="password">Пароль:</label>
+      <span class="helper-text red-text"
+            *ngIf="form.get('password')?.invalid && form.get('password')?.touched">Введите пароль!
+      </span>
     </div>
+    <p>
+      <label>
+        <input type="checkbox" class="filled-in"/>
+        <span>Запомнить профиль?</span>
+      </label>
+    </p>
   </div>
   <div class="card-action">
     <button

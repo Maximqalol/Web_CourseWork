@@ -18,7 +18,7 @@ const routes: Routes = [
     path: '', component: SiteLayoutComponent, children: [
       {path: '', redirectTo: "/mainpage", pathMatch: "full"},
       {path: 'edit', component: EditPageComponent},
-      {path: 'logout', redirectTo: "/mainpage"}
+      {path: 'logout', redirectTo: "/login"}
     ]
   }
 ]

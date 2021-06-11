@@ -9,7 +9,6 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 export class LoginPageComponent implements OnInit {
 
   form!: FormGroup
-  hidePassword = true;
   constructor() {
   }
 
@@ -20,6 +19,6 @@ export class LoginPageComponent implements OnInit {
     })
   }
   onSubmit() {
-
+    console.log(this.form.get('username'))
   }
 }
