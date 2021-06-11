@@ -1,0 +1,38 @@
+plugins {
+    id 'java'
+    id 'war'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+ext{
+    spring_boot_ver = "2.3.4.RELEASE"
+    mapstruct_ver = "1.4.1.Final"
+    postgres_ver = "42.2.18"
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+    implementation "org.springframework.boot:spring-boot-starter-web:$spring_boot_ver"
+    implementation "org.springframework.boot:spring-boot-autoconfigure:$spring_boot_ver"
+    implementation "org.springframework.boot:spring-boot-starter-data-jpa:$spring_boot_ver"
+    implementation "org.postgresql:postgresql:$postgres_ver"
+    compileOnly "org.mapstruct:mapstruct:$mapstruct_ver"
+    annotationProcessor "org.mapstruct:mapstruct-processor:$mapstruct_ver"
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf', version: '2.3.7.RELEASE'
+    compile group: 'org.webjars', name: 'jquery', version: '3.5.1'
+    compile group: 'org.webjars', name: 'bootstrap', version: '4.5.3'
+    compile group: 'org.webjars', name: 'webjars-locator-core', version: '0.46'
+    implementation 'org.springframework.boot:spring-boot-starter-security:2.3.7.RELEASE'
+    compile group: 'javax.servlet', name: 'jstl', version: '1.2'
+    compile group: 'org.eclipse.jdt.core.compiler', name: 'ecj', version: '4.6.1'
+    providedCompile group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.1'
+
+
+}

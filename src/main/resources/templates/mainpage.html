@@ -1,0 +1,47 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Main page</title>
+    <style>
+        .wrapper {
+            top: 20%;
+            left: 50%;
+            width: 500px;
+            height: 500px;
+            position: absolute;
+            margin-top: -225px;
+            margin-left: -225px;
+            font-size: 180%;
+        }
+        body {
+            background-color: lightskyblue;
+            background-size: 100%;
+        }
+    </style>
+</head>
+<body>
+<div class = wrapper>
+    <h1>My page</h1>
+    <form name="f" th:action="@{/login}" method="post">
+
+        <p>
+            <img th:src="'data:image/jpeg;base64,' + ${imgUtil.getImgData(user.photo)}" alt="" class="round" width="250" height="250">
+        </p>
+        <h3 class="text">[[${#request.userPrincipal.principal.fullName}]]</h3>
+        <br>
+        <h3>Entry count</h3>
+        <h3 class="text" th:text="${user.count}"></h3>
+        <br>
+        <br>
+        <h3 class="text" th:text="${date}"></h3>
+        <div class="form-actions">
+            <a th:href="@{/editing}">Edit profile</a>
+            <a th:href="@{/delete}">Delete profile</a>
+            <form class="form-inline my-2 my-lg-0" form-method="post" th:action="@{/logout}">
+                <button style="height:45px;width:172px" class="btn btn-outline-danger my-2 my-sm-0 btn-sm" type="submit">Logout</button>
+            </form>
+            <a> </a>
+        </div>
+    </form>
+</div>
+</body>
+</html>

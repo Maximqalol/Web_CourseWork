@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Registration</title>
+    <style>
+        .wrapper {
+            top: 30%;
+            left: 50%;
+            width: 450px;
+            height: 450px;
+            position: absolute;
+            margin-top: -225px;
+            margin-left: -225px;
+            font-size: 180%;
+        }
+        body {
+            background-color: lightskyblue;
+            background-size: 100%;
+        }
+    </style>
+</head>
+<body>
+<div class="wrapper">
+    <div>
+        <h1>Registration</h1>
+    </div>
+    <form th:action="@{/register}" th:object="${user}"
+          method="post" style="max-width: 600px; margin: 0 auto;" enctype="multipart/form-data">
+        <div class="m-3">
+
+            <div class="form-group row">
+                <label class="col-4 col-form-label">Last name: </label>
+                <div class="col-8">
+                    <input style="height: 30px; background-size: 30px; font-size: 30px;" type="text" th:field="*{last_name}" class="form-control"
+                           required minlength="2" maxlength="20"/>
+                </div>
+            </div>
+            <br>
+            <div class="form-group row">
+                <label class="col-4 col-form-label">First Name: </label>
+                <div class="col-8">
+                    <input style="height: 30px; background-size: 30px; font-size: 30px;" type="text" th:field="*{first_name}" class="form-control"
+                           required minlength="2" maxlength="20"/>
+                </div>
+            </div>
+            <br>
+            <div class="form-group row">
+                <label class="col-4 col-form-label">Middle Name: </label>
+                <div class="col-8">
+                    <input style="height: 30px; background-size: 30px; font-size: 30px;" type="text" th:field="*{middle_name}" class="form-control"
+                           required minlength="2" maxlength="20" />
+                </div>
+            </div>
+            <br>
+            <div class="form-group row">
+                <label class="col-4 col-form-label">Username: </label>
+                <div class="col-8">
+                    <input style="height: 30px; background-size: 30px; font-size: 30px;" type="text" th:field="*{username}" class="form-control"
+                           required minlength="5" maxlength="25" />
+                </div>
+            </div>
+            <br>
+            <div class="form-group row">
+                <label class="col-4 col-form-label">Password: </label>
+                <div class="col-8">
+                    <input style="height: 30px; background-size: 30px; font-size: 30px;" type="password" th:field="*{password}" class="form-control"
+                           required minlength="6" maxlength="25"/>
+                </div>
+            </div>
+            <br>
+            <div class="form-group row">
+                <p>
+                    <input style="height: 30px; background-size: 20px; font-size: 20px;" type="file" name="file" required />
+                </p>
+            </div>
+
+            <div>
+                <button style="height:45px;width:372px" type="submit" class="btn btn-primary">Register</button>
+            </div>
+
+        </div>
+    </form>
+</div>
+</body>
+</html>

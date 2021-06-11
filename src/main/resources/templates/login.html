@@ -1,0 +1,49 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Authorization</title>
+    <style>
+        .wrapper {
+            top: 30%;
+            left: 50%;
+            width: 450px;
+            height: 450px;
+            position: absolute;
+            margin-top: -225px;
+            margin-left: -225px;
+            font-size: 180%;
+        }
+        body {
+            background-color: lightskyblue;
+            background-size: 100%;
+        }
+    </style>
+</head>
+<body>
+<div class = wrapper>
+    <h1>Authorization</h1>
+    <form name="f" th:action="@{/login}" method="post">
+            <div th:if="${param.error}" class="alert alert-error">
+                Invalid username or password.
+            </div>
+            <div th:if="${param.logout}" class="alert alert-success">
+                You have been logged out.
+            </div>
+            <br>
+            <br>
+            <label for="username">Username</label>
+            <input style="height: 30px; background-size: 30px; font-size: 30px;" type="text" id="username" name="username"/>
+            <br>
+            <br>
+            <label for="password">Password</label>
+            <input style="height: 30px; background-size: 30px; font-size: 30px;" type="password" id="password" name="password"/>
+            <br>
+            <br>
+            <label style="font-size: 80%" for="remember">Remember me</label><input id="remember" type="checkbox" name="remember-me" value="true">
+            <div class="form-actions">
+                <button style="height:45px;width:172px" type="submit" class="btn">Enter</button>
+                <a th:href="@{/reggg}">Registration</a>
+            </div>
+    </form>
+</div>
+</body>
+</html>
