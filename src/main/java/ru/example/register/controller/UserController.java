@@ -1,6 +1,7 @@
 package ru.example.register.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -17,7 +18,11 @@ import java.io.IOException;
  * Controller who handles registration and authorization
  */
 
-@Controller
+@RestController
+@RequestMapping(
+        path = "/auth/user",
+        produces = MediaType.APPLICATION_JSON_VALUE
+)
 public class UserController {
     private final IUserService userService;
 

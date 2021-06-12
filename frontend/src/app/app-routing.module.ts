@@ -5,6 +5,8 @@ import {AuthLayoutComponent} from "./shared/layouts/auth-layout/auth-layout.comp
 import {SiteLayoutComponent} from "./shared/layouts/site-layout/site-layout.component";
 import {RegisterPageComponent} from "./register-page/register-page.component";
 import {EditPageComponent} from "./edit-page/edit-page.component";
+import {MainPageComponent} from "./main-page/main-page.component";
+import {AuthGuard} from "./shared/guard/auth.guard";
 
 const routes: Routes = [
   {
@@ -16,7 +18,8 @@ const routes: Routes = [
   },
   {
     path: '', component: SiteLayoutComponent, children: [
-      {path: '', redirectTo: "/mainpage", pathMatch: "full"},
+      //{path: '', redirectTo: "/mainpage", pathMatch: "full"},
+      {path: 'mainpage', component: MainPageComponent},
       {path: 'edit', component: EditPageComponent},
       {path: 'logout', redirectTo: "/login"}
     ]
