@@ -1,5 +1,21 @@
+<nav>
+  <div class="nav-wrapper teal lighten-2">
+    <a routerLink ="/login" class="brand-logo" style="font-family: Comic Sans MS, Geneva, sans-serif">AuthWebApp</a>
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <li routerLinkActive="active">
+        <a routerLink ="/login">Вход</a>
+      </li>
+      <li routerLinkActive="active">
+        <a routerLink ="/register">Регистрация</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="auth-block">
+
 <div class="card">
-  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <form [formGroup]="form">
   <div class="card-content">
     <span class="card-title">Войти в систему</span>
     <div class="input-field">
@@ -19,7 +35,7 @@
         type="password">
       <label for="password">Пароль:</label>
       <span class="helper-text red-text"
-            *ngIf="form.get('password')?.invalid && form.get('password')?.touched">Введите пароль!
+            *ngIf="form.get('password')?.invalid && form.get('password')?.touched">Введите корректный пароль!
       </span>
     </div>
     <p>
@@ -31,11 +47,13 @@
   </div>
   <div class="card-action">
     <button
-      [disabled]="form.invalid"
+      (click)="onSubmit(form.value)"
       type="submit"
       class="modal-action btn waves-effect"
     >
       Войти</button>
   </div>
   </form>
+</div>
+
 </div>

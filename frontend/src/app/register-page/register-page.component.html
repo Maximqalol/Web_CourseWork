@@ -1,70 +1,96 @@
-<div class="card">
-  <form [formGroup]="form" (ngSubmit)="onSubmit()">
-  <div class="card-content">
-    <span class="card-title">Регистрация профиля</span>
-    <div class="input-field">
-      <input
-        formControlName="last_name"
-        id="last_name" type="text" class="validate">
-      <label for="last_name">Фамилия:</label>
-      <span class="helper-text red-text"
-            *ngIf="form.get('last_name')?.touched && form.get('last_name')?.invalid">Введите фамилию!
-      </span>
-    </div>
-    <div class="input-field">
-      <input
-        formControlName="first_name"
-        id="first_name" type="text" class="validate">
-      <label for="first_name">Имя:</label>
-      <span class="helper-text red-text"
-            *ngIf="form.get('first_name')?.touched && form.get('first_name')?.invalid">Введите имя!
-      </span>
-    </div>
-    <div class="input-field">
-      <input
-        formControlName="middle_name"
-        id="middle_name" type="text" class="validate">
-      <label for="middle_name">Отчество:</label>
-      <span class="helper-text red-text"
-            *ngIf="form.get('middle_name')?.touched && form.get('middle_name')?.invalid">Введите отчество!
-      </span>
-    </div>
-    <div class="input-field">
-      <input
-        formControlName="username"
-        id="username" type="text" class="validate">
-      <label for="username">Имя пользователя:</label>
-      <span class="helper-text red-text"
-            *ngIf="form.get('username')?.invalid && form.get('username')?.touched"
-            >Имя пользователя должно содержать хотя бы 5 символов!
-      </span>
-    </div>
-    <div class="input-field">
-      <input
-        formControlName="password"
-        id="password" type="password">
-      <label for="password">Пароль:</label>
-      <span class="helper-text red-text"
-            *ngIf="form.get('password')?.invalid && form.get('password')?.touched"
-            >Пароль должен содержать хотя бы 6 символов!
-      </span>
-    </div>
-    <label>Фотография пользователя:</label>
-    <div class="file-field input-field">
-      <div class="btn">
-        <span>Выбрать</span>
-        <input id="file" type="file" required>
-      </div>
-      <div class="file-path-wrapper">
-        <input class="file-path validate" type="text">
-      </div>
-    </div>
+<nav>
+  <div class="nav-wrapper teal lighten-2">
+    <a routerLink="/login" class="brand-logo" style="font-family: Comic Sans MS, Geneva, sans-serif">AuthWebApp</a>
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <li routerLinkActive="active">
+        <a routerLink="/login">Вход</a>
+      </li>
+      <li routerLinkActive="active">
+        <a routerLink="/register">Регистрация</a>
+      </li>
+    </ul>
   </div>
-  <div class="card-action">
-    <button
-      [disabled]="form.invalid"
-      class="modal-action btn waves-effect"
-    >Зарегистрироваться</button>
+</nav>
+
+<div class="auth-block">
+
+  <div class="card">
+    <form [formGroup]="form" method="post" enctype="multipart/form-data">
+      <div class="card-content">
+        <span class="card-title">Регистрация профиля</span>
+        <div class="input-field">
+          <input
+            formControlName="last_name"
+            id="last_name" type="text" class="validate">
+          <label for="last_name">Фамилия:</label>
+          <span class="helper-text red-text"
+                *ngIf="form.get('last_name')?.touched && form.get('last_name')?.invalid">Введите фамилию!
+      </span>
+        </div>
+        <div class="input-field">
+          <input
+            formControlName="first_name"
+            id="first_name" type="text" class="validate">
+          <label for="first_name">Имя:</label>
+          <span class="helper-text red-text"
+                *ngIf="form.get('first_name')?.touched && form.get('first_name')?.invalid">Введите имя!
+      </span>
+        </div>
+        <div class="input-field">
+          <input
+            formControlName="middle_name"
+            id="middle_name" type="text" class="validate">
+          <label for="middle_name">Отчество:</label>
+          <span class="helper-text red-text"
+                *ngIf="form.get('middle_name')?.touched && form.get('middle_name')?.invalid">Введите отчество!
+      </span>
+        </div>
+        <div class="input-field">
+          <input
+            formControlName="username"
+            id="username" type="text" class="validate">
+          <label for="username">Имя пользователя:</label>
+          <span class="helper-text red-text"
+                *ngIf="form.get('username')?.invalid && form.get('username')?.touched"
+          >Имя пользователя должно содержать хотя бы 5 символов!
+      </span>
+        </div>
+        <div class="input-field">
+          <input
+            formControlName="password"
+            id="password" type="password">
+          <label for="password">Пароль:</label>
+          <span class="helper-text red-text"
+                *ngIf="form.get('password')?.invalid && form.get('password')?.touched"
+          >Пароль должен содержать хотя бы 6 символов!
+      </span>
+        </div>
+        <label>Фотография пользователя:</label><br>
+        <span class="helper-text red-text"
+              *ngIf="form.get('photo')?.touched && form.get('photo')?.invalid"
+        >Выберите вашу фотографию!
+      </span>
+        <div class="file-field input-field">
+          <div class="btn">
+            <span>Выбор</span>
+            <input
+              formControlName="photo"
+              type="file"
+              required>
+          </div>
+          <div class="file-path-wrapper">
+            <input class="file-path validate" type="text" placeholder="Название фотографии:">
+          </div>
+        </div>
+        <div class="card-action">
+          <button
+            (click)="onSubmit()"
+            class="modal-action btn waves-effect"
+          >Зарегистрироваться
+          </button>
+        </div>
+      </div>
+    </form>
   </div>
-  </form>
+
 </div>

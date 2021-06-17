@@ -21,7 +21,7 @@
 <body>
 <div class = wrapper>
     <h1>Authorization</h1>
-    <form name="f" th:action="@{/login}" method="post">
+    <form name="f" method="post">
             <div th:if="${param.error}" class="alert alert-error">
                 Invalid username or password.
             </div>

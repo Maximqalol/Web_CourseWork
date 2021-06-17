@@ -6,6 +6,9 @@ import org.springframework.stereotype.Service;
 import ru.example.register.db.entity.User;
 import ru.example.register.db.repository.UserRepository;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.Base64;
+
 /**
  * @author Maxim Komov
  * Class overriding user's service methods
@@ -26,6 +29,7 @@ public class UserServiceImpl implements IUserService {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String encodedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
+        //user.setPhoto();
         return userRepository.save(user);
     }
 
@@ -42,5 +46,18 @@ public class UserServiceImpl implements IUserService {
     @Override
     public User findByUsername(String username) {
         return userRepository.findByUsername(username);
+    }
+
+    @Override
+    public User findById(int id) {
+        return userRepository.findById(id);
+    }
+
+    @Override
+    public User getCurrentUser(HttpServletRequest request) {
+        String authToken = request.getHeader("Authorization").substring("Basic".length()).trim();
+        String username = new String(Base64.getDecoder().decode(authToken)).split(":", 2)[0];
+        User foundedUsername = userRepository.findByUsername(username);
+        return foundedUsername;
     }
 }

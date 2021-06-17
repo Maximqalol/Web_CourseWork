@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {RestapiService} from "../restapi.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-register-page',
@@ -10,7 +12,7 @@ export class RegisterPageComponent implements OnInit {
 
   form!: FormGroup
 
-  constructor() {
+  constructor(private service: RestapiService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -19,11 +21,20 @@ export class RegisterPageComponent implements OnInit {
       first_name: new FormControl(null, [Validators.required, Validators.maxLength(30)]),
       middle_name: new FormControl(null, [Validators.required, Validators.maxLength(30)]),
       username: new FormControl(null, [Validators.required, Validators.minLength(5), Validators.maxLength(30)]),
-      password: new FormControl(null, [Validators.required, Validators.minLength(6), Validators.maxLength(30)])
+      password: new FormControl(null, [Validators.required, Validators.minLength(6), Validators.maxLength(30)]),
+      photo: new FormControl(null, [Validators.required])
     })
   }
+
   onSubmit() {
-    console.log(this.form.get('username'))
+    this.form.disable()
+      this.service.register(this.form.value).subscribe(() => {
+        this.router.navigate(['/login']);
+      },
+        error => {
+        console.warn(error)
+          this.form.enable()
+        })
   }
 
 }
