@@ -1,0 +1,40 @@
+<nav>
+  <div class="nav-wrapper teal lighten-2">
+    <a routerLink="/mainpage" class="brand-logo" style="font-family: Comic Sans MS, Geneva, sans-serif">AuthWebApp</a>
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <li routerLinkActive="active">
+        <a routerLink="/edit">Изменить профиль</a>
+      </li>
+      <li routerLinkActive="active">
+        <a (click)="logout()" routerLink="/login">Выйти</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="auth-block">
+
+  <div class="card center-align">
+    <div class="card-content">
+      <img src="{{photo}}" alt="Нет фотографии" class="round scale" width="280" height="280">
+      <span class="card-title"></span>
+      <div class="card-content">
+        <h2>{{last_name}} {{first_name}} {{middle_name}}</h2><br><br>
+        <h3>Количество посещений данной страницы: {{countEntry}}</h3>
+        <i class="medium material-icons">date_range</i>
+        <h3> Дата: {{ dateToday | date: "dd.MM.yyyy"}}</h3>
+        <h3> Московское время: {{ dateToday | date: "HH:mm"}}</h3>
+      </div>
+      <div class="card-action">
+        <button
+          (click)="deleteProfile()"
+          type="submit"
+          class="modal-action btn waves-effect"
+        >
+          Удалить профиль
+        </button>
+      </div>
+    </div>
+  </div>
+
+</div>

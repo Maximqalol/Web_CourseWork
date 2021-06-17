@@ -1,0 +1,10 @@
+.round {
+  text-align: center;
+  border-radius: 50%;
+}
+.scale {
+  transition: 1s; /* Время эффекта */
+}
+.scale:hover {
+  transform: scale(1.15); /* Увеличиваем масштаб */
+}
