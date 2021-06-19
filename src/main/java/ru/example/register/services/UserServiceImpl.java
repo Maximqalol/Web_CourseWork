@@ -29,13 +29,13 @@ public class UserServiceImpl implements IUserService {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String encodedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
-        //user.setPhoto();
         return userRepository.save(user);
     }
 
     @Override
     public User change(User user) {
-        return userRepository.save(user);
+        User user1 = userRepository.save(user);
+        return user1;
     }
 
     @Override

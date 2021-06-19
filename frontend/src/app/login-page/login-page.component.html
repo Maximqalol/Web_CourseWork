@@ -18,6 +18,7 @@
   <form [formGroup]="form">
   <div class="card-content">
     <span class="card-title">Войти в систему</span>
+    <span class="helper-text red-text">{{invalidData}}</span>
     <div class="input-field">
       <input
         formControlName="username"
@@ -40,7 +41,7 @@
     </div>
     <p>
       <label>
-        <input type="checkbox" class="filled-in"/>
+        <input type="checkbox" class="filled-in" name="remember-me-param"/>
         <span>Запомнить профиль?</span>
       </label>
     </p>

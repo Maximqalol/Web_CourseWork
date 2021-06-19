@@ -1,6 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {RestapiService} from "../restapi.service";
+import {Router} from "@angular/router";
+import {User} from "../shared/models/user";
+import {FormGroup} from "@angular/forms";
+import {Picture} from "../shared/models/picture";
 
 @Component({
   selector: 'app-main-page',
@@ -8,42 +12,42 @@ import {RestapiService} from "../restapi.service";
   styleUrls: ['./main-page.component.css']
 })
 export class MainPageComponent implements OnInit {
-  last_name!: string
-  first_name!: string
-  middle_name!: string
-  countEntry!: number
-  photo!: string
+
+  currentUser!: User
+
+  form!: FormGroup
 
   dateToday: number = Date.now();
+  logoutMessage!: string
 
 
-  constructor(private http: HttpClient, private auth: RestapiService) {
+  constructor(private http: HttpClient, private auth: RestapiService, private router: Router) {
   }
 
   ngOnInit(): void {
-    this.auth.getCurrentUserData().subscribe(data => {
-         this.last_name = data.last_name;
-         this.first_name = data.first_name;
-         this.middle_name = data.middle_name;
-         this.countEntry = data.count;
-         this.photo = 'data:image/png;base64,' + data.photo;
-        console.log(data)
-      },
-      error => {
-        if (error.status == 401)
-          alert('Unauthorized');
-        console.log(error)
+    this.setCurrentUser()
+  }
+
+  setCurrentUser() {
+    this.auth.getCurrentUserData().subscribe(
+      res => {
+        this.currentUser = res;
+      }, error => {
+        console.log('Не удалось загрузить пользователя');
       }
-    );
+    )
   }
 
   logout() {
     sessionStorage.setItem('token', '');
+    this.logoutMessage = "Вы успешно вышли из аккаунта!"
   }
 
 
   deleteProfile() {
-
+    this.auth.delete(this.currentUser.username).subscribe(data =>{}, error => {console.log(error)});
+    sessionStorage.setItem('token', '');
+    this.router.navigateByUrl("/login")
   }
 
 }

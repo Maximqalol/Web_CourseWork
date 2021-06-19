@@ -8,3 +8,14 @@
 .scale:hover {
   transform: scale(1.15); /* Увеличиваем масштаб */
 }
+
+.normsize {
+  width: 280px;
+  height: 280px;
+}
+
+/* resize images */
+.normsize img {
+  width: 100%;
+  height: auto;
+}

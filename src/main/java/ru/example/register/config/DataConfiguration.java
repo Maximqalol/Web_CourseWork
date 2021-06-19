@@ -5,8 +5,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 /**
- * @author Maxim Komov
- * DataConfiguration
+ * Конфигурационный класс для таблиц.
+ *
+ * @author Максим Комов
  */
 @Configuration
 @EntityScan(basePackages = "ru.example.register.db.entity")

@@ -5,14 +5,28 @@ import org.springframework.stereotype.Repository;
 import ru.example.register.db.entity.User;
 
 /**
- * @author Maxim Komov
- * Repository with method for searching users
+ * Репозиторий для пользователей.
+ *
+ * @author Комов Максим
  */
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
 
+    /**
+     * Поиск картинки по ее названию.
+     *
+     * @param username имя пользователя
+     * @return найденное имя пользователя
+     */
     User findByUsername(String username);
+
+    /**
+     * Поиск картинки по ее названию.
+     *
+     * @param id айди пользователя
+     * @return найденное айди пользователя
+     */
     User findById(int id);
 
 }

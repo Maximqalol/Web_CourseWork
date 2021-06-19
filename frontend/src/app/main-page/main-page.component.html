@@ -16,11 +16,11 @@
 
   <div class="card center-align">
     <div class="card-content">
-      <img src="{{photo}}" alt="Нет фотографии" class="round scale" width="280" height="280">
+      <img src="data:image/png;base64,{{currentUser.picture.data}}" alt="Нет фотографии" class="round scale normsize">
       <span class="card-title"></span>
       <div class="card-content">
-        <h2>{{last_name}} {{first_name}} {{middle_name}}</h2><br><br>
-        <h3>Количество посещений данной страницы: {{countEntry}}</h3>
+        <h2>{{currentUser.last_name}} {{currentUser.first_name}} {{currentUser.middle_name}}</h2><br><br>
+        <h3>Количество посещений данной страницы: {{currentUser.count}}</h3>
         <i class="medium material-icons">date_range</i>
         <h3> Дата: {{ dateToday | date: "dd.MM.yyyy"}}</h3>
         <h3> Московское время: {{ dateToday | date: "HH:mm"}}</h3>

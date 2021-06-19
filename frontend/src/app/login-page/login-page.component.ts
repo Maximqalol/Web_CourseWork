@@ -13,7 +13,7 @@ export class LoginPageComponent implements OnInit {
 
   form!: FormGroup
   model: any = {}
-  message: any
+  invalidData!: string
 
   constructor(private service: RestapiService, private router: Router) {
 
@@ -31,12 +31,17 @@ export class LoginPageComponent implements OnInit {
     this.service.login(form).subscribe(isValid => {
       if (isValid) {
         sessionStorage.setItem('token', btoa(this.form.get('username')?.value + ':' + this.form.get('password')?.value));
+        sessionStorage.setItem('username', this.form.get('username')?.value);
         console.log(isValid)
         this.router.navigate(['/mainpage']);
       } else {
-        alert("Authentication failed.")
+        this.invalidData = "Неверное имя пользователя или пароль!";
       }
-    })
+    },
+      error => {
+        this.invalidData = "Неверное имя пользователя или пароль!";
+      }
+    )
 
   }
 }

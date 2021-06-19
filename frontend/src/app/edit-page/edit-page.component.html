@@ -6,7 +6,7 @@
         <a routerLink = "/edit">Изменить профиль</a>
       </li>
       <li routerLinkActive="active">
-        <a routerLink = "/login">Выйти</a>
+        <a (click)="logout()" routerLink = "/login">Выйти</a>
       </li>
     </ul>
   </div>
@@ -14,14 +14,16 @@
 
 <div class="auth-block">
 <div class="card">
-  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <form [formGroup]="form">
     <div class="card-content">
       <span class="card-title">Изменить профиль</span>
       <div class="input-field">
+<!--        <input type="hidden" class="active" formControlName="id_user">-->
         <input
           formControlName="last_name"
-          id="last_name" type="text" class="validate">
-        <label for="last_name">Фамилия:</label>
+
+          id="last_name" type="text" class="validate" required>
+        <label for="last_name" class="active">Фамилия:</label>
         <span class="helper-text red-text"
               *ngIf="form.get('last_name')?.touched && form.get('last_name')?.invalid">Введите фамилию!
       </span>
@@ -29,8 +31,9 @@
       <div class="input-field">
         <input
           formControlName="first_name"
-          id="first_name" type="text" class="validate">
-        <label for="first_name">Имя:</label>
+
+          id="first_name" type="text" class="validate" required>
+        <label for="first_name" class="active">Имя:</label>
         <span class="helper-text red-text"
               *ngIf="form.get('first_name')?.touched && form.get('first_name')?.invalid">Введите имя!
       </span>
@@ -38,8 +41,9 @@
       <div class="input-field">
         <input
           formControlName="middle_name"
-          id="middle_name" type="text" class="validate">
-        <label for="middle_name">Отчество:</label>
+
+          id="middle_name" type="text" class="validate" required>
+        <label for="middle_name" class="active">Отчество:</label>
         <span class="helper-text red-text"
               *ngIf="form.get('middle_name')?.touched && form.get('middle_name')?.invalid">Введите отчество!
       </span>
@@ -47,37 +51,44 @@
       <div class="input-field">
         <input
           formControlName="username"
-          id="username" type="text" class="validate">
-        <label for="username">Имя пользователя:</label>
+
+          id="username" type="text" class="validate" required>
+        <label for="username" class="active">Имя пользователя:</label>
         <span class="helper-text red-text"
-              *ngIf="form.get('username')?.invalid && form.get('username')?.touched"
-        >Имя пользователя должно содержать хотя бы 5 символов!
+              *ngIf="form.get('username')?.touched && form.get('username')?.invalid">Имя пользователя должно содержать не менее 5 символов!
       </span>
       </div>
       <div class="input-field">
         <input
           formControlName="password"
-          id="password" type="password">
+          id="password" type="password" required>
         <label for="password">Пароль:</label>
         <span class="helper-text red-text"
-              *ngIf="form.get('password')?.invalid && form.get('password')?.touched"
-        >Пароль должен содержать хотя бы 6 символов!
+              *ngIf="form.get('password')?.touched && form.get('password')?.invalid">Пароль должен содержать не менее 5 символов!
       </span>
       </div>
       <label>Фотография пользователя:</label>
+      <span class="helper-text red-text"
+            *ngIf="form.get('photo')?.touched && form.get('photo')?.invalid"
+      >Выберите вашу фотографию!
+      </span>
       <div class="file-field input-field">
         <div class="btn">
           <span>Выбрать</span>
-          <input id="file" type="file" required>
+          <input
+            (change)="selectFile($event)"
+            formControlName="photo"
+            id="file" type="file">
         </div>
         <div class="file-path-wrapper">
           <input class="file-path validate" type="text">
         </div>
       </div>
     </div>
-    <div class="card-action">
+    <div class="card-action center-align">
       <button
         [disabled]="form.invalid"
+        (click)="onSubmit()"
         class="modal-action btn waves-effect"
       >Изменить</button>
     </div>
